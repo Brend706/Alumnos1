@@ -14,5 +14,8 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('index');
 });
+
+Route::resource('carreras', \App\Http\Controllers\CarrerasController::class);
+Route::resource('alumnos', \App\Http\Controllers\AlumnosController::class);
