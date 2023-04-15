@@ -26,7 +26,28 @@
                     </tr>
                 </thead>
                 <tbody class="table-group-divider">
-
+                    @php $id = 1; @endphp
+                    @foreach($carreras as $row)
+                        <tr>
+                            <td>{{ $i++ }}</td>
+                            <td>{{ $row->carrera}}</td>
+                            <td>
+                                <a href="{{ url('carreras', [$row]) }}" class="btn btn-warning">
+                                    <i class="fa-solid fa-edit"></i>
+                                </a>
+                            </td>
+                            <td>
+                                <form method="POST" action="{{ url('carreras', [$row]) }}">
+                                    @method("delete")
+                                    @csrf <!--Genera un token c/v que se envia info cada sierto tiempo
+                                    Evita ataques ... -->
+                                    <button class="btn btn-danger">
+                                        <i class="fa-solid fa-trash"></i>
+                                    </button>
+                                </form>
+                            </td>
+                        </tr>
+                    @endforeach
                 </tbody>
             </table>
         </div>
