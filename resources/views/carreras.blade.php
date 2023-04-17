@@ -26,7 +26,7 @@
                     </tr>
                 </thead>
                 <tbody class="table-group-divider">
-                    @php $id = 1; @endphp
+                    @php $i = 1; @endphp
                     @foreach($carreras as $row)
                         <tr>
                             <td>{{ $i++ }}</td>
@@ -52,6 +52,36 @@
             </table>
         </div>
     </div>
+</div>
+
+<div class="modal fade" id="modalCarreras" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="tituloModal">Agregar carrera</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form id="frmCarreras" method="POST" action="{{ url('carreras') }}">
+            @csrf
+          <div class="input-group mb-3">
+            <span class="input-group-text">
+                <i class="fa-solid fa-graduation-cap"></i>
+            </span>
+            <input type="text" class="form-control" name="carrera" maxlength="50" placeholder="Carrera..." required>
+          </div>
+          <div class="d-grid col-6 mx-auto">
+            <button class="btn btn-success">
+                <i class="fa-solid fa-floppy-disk"></i> Guardar
+            </button>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" id="btnCerrar" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+      </div>
+    </div>
+  </div>
 </div>
 
 @endsection

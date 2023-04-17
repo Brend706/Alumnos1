@@ -10,7 +10,7 @@ class CarrerasController extends Controller
    
     public function index()
     {
-        //Donde se muestran todos los elementos guardados en la db
+        //muestran o devuelve todos los elementos guardados en la db
         $carreras = Carreras::all();
         return view('carreras', compact('carreras'));
     }
@@ -22,12 +22,17 @@ class CarrerasController extends Controller
 
     public function store(Request $request)
     {
-        //
+        //se encarga de guardar nuevos objetos o elementos en la db
+        $carrera = new Carreras($request->input());
+        $carrera->saveOrFail();
+        return redirect('carreras');
     }
 
     public function show(string $id)
     {
-        //
+        //busca la carrera mediante el id
+        $carrera = Carreras::find($id);
+        return view('editCarrera', compact('carrera'));
     }
 
     public function edit(string $id)
@@ -37,7 +42,9 @@ class CarrerasController extends Controller
 
     public function update(Request $request, string $id)
     {
-        //
+        $carrera = Carreras::find($id);
+        $carrera->fill($request->input())->saveOrFail();
+        return view('editCarrera', compact('carrera'));
     }
 
     public function destroy(string $id)
