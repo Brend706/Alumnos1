@@ -44,11 +44,13 @@ class CarrerasController extends Controller
     {
         $carrera = Carreras::find($id);
         $carrera->fill($request->input())->saveOrFail();
-        return view('editCarrera', compact('carrera'));
+        return redirect('carreras');
     }
 
     public function destroy(string $id)
     {
-        //
+        $carrera = Carreras::find($id);
+        $carrera->delete();
+        return redirect('carreras');
     }
 }

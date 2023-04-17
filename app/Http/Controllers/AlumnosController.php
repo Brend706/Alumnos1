@@ -2,16 +2,17 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Alumnos;
+use App\Models\Carreras;
 use Illuminate\Http\Request;
 
 class AlumnosController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        //
+        $alumnos = Alumnos::all();
+        $carreras = Carreras::all();
+        return view('alumnos', compact('alumnos', 'carreras'));
     }
 
     /**
@@ -19,7 +20,7 @@ class AlumnosController extends Controller
      */
     public function create()
     {
-        //
+
     }
 
     /**
@@ -27,7 +28,9 @@ class AlumnosController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $alumno = new Alumnos($request->input());
+        $alumno->saveOrFail();
+        return redirect('alumnos');
     }
 
     /**
@@ -35,7 +38,9 @@ class AlumnosController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $alumno = Alumnos::find($id);
+        $carreras = Carreras::all();
+        return view('editAlumno', compact('alumno', 'carreras'));
     }
 
     /**
@@ -51,7 +56,9 @@ class AlumnosController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $alumno = Alumnos::find($id);
+        $alumno->fill($request->input())->saveOrFail();
+        return redirect('alumnos');
     }
 
     /**
@@ -59,6 +66,8 @@ class AlumnosController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $alumno = Alumnos::find($id);
+        $alumno->delete();
+        return redirect('alumnos');
     }
 }
