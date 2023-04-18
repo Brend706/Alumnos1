@@ -35,6 +35,7 @@
     </div>
 
     <script type="text/javascript" src="{{ asset('js/bootstrap.bundle.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/sweetalert2.all.min.js') }}"></script>
 </body>
 
 </html>

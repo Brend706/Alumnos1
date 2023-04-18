@@ -33,12 +33,13 @@
                             <td>{{ $i++ }}</td>
                             <td>{{ $row->nombre }}</td>
                             <td>{{ $row->correo }}</td>
-                            <!-- Para mostrar el nombre de la carrera-->
-                            @foreach($carreras as $carrera)
-                                @if($row->id_carrera == $carrera->id)
-                                    <td>{{ $carrera->carrera}}</td>
-                                @endif
-                            @endforeach
+                            <td>{{ $row->carrera }}</td>
+                            <!-- Otra forma de poder mostrar el nombre de la carrera
+                                @foreach($carreras as $carrera)
+                                    @if($row->id_carrera == $carrera->id)
+                                        <td>{{ $carrera->carrera}}</td>
+                                    @endif
+                                @endforeach-->
                             <td>
                                 <a href="{{ url('alumnos', [$row]) }}" class="btn btn-warning">
                                     <i class="fa-solid fa-edit"></i>

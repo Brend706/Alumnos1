@@ -10,7 +10,9 @@ class AlumnosController extends Controller
 {
     public function index()
     {
-        $alumnos = Alumnos::all();
+        //$alumnos = Alumnos::all();
+        /*Para traer el nombre especifico de la carrera*/
+        $alumnos = Alumnos::select('alumnos.id', 'nombre', 'correo', 'id_carrera', 'carrera')->join('carreras', 'carreras.id', '=', 'alumnos.id_carrera')->get();
         $carreras = Carreras::all();
         return view('alumnos', compact('alumnos', 'carreras'));
     }
