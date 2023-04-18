@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('carrera', 50);
             $table->timestamps(); //marcas de tiempo
+            $table->softDeletes(); //fecha de eliminacion
         });
     }
 

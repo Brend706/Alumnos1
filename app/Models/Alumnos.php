@@ -10,4 +10,12 @@ class Alumnos extends Model
     use HasFactory;
     public $timestamps = false;
     protected $fillable = ['nombre', 'correo', 'id_carrera'];
+
+    public function carrera(){
+        //Relacion de 1 a 1
+        //Un alumnos solo tiene 1 carrera
+        return $this->belongsTo(Carreras::class)->withTrashed();
+    }
 }
+
+

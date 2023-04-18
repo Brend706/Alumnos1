@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Carreras;
 use Illuminate\Http\Request;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class CarrerasController extends Controller
 {
@@ -25,6 +26,9 @@ class CarrerasController extends Controller
         //se encarga de guardar nuevos objetos o elementos en la db
         $carrera = new Carreras($request->input());
         $carrera->saveOrFail();
+
+        Alert::toast('Guardado correctamente!', 'success');
+
         return redirect('carreras');
     }
 
