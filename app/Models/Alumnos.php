@@ -13,7 +13,7 @@ class Alumnos extends Model
 
     public function carrera(){
         //Relacion de 1 a 1
-        //Un alumnos solo tiene 1 carrera
+        //Un alumno solo tiene 1 carrera
         return $this->belongsTo(Carreras::class)->withTrashed();
     }
 }
