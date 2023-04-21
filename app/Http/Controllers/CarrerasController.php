@@ -26,9 +26,7 @@ class CarrerasController extends Controller
         //se encarga de guardar nuevos objetos o elementos en la db
         $carrera = new Carreras($request->input());
         $carrera->saveOrFail();
-
         Alert::toast('Guardado correctamente!', 'success');
-
         return redirect('carreras');
     }
 
@@ -55,6 +53,6 @@ class CarrerasController extends Controller
     {
         $carrera = Carreras::find($id);
         $carrera->delete();
-        return redirect('carreras');
+        return redirect('carreras')->with('confirmacion', 'ok');
     }
 }

@@ -46,7 +46,7 @@
                                 </a>
                             </td>
                             <td>
-                                <form method="POST" action="{{ url('alumnos', [$row]) }}">
+                                <form method="POST" action="{{ url('alumnos', [$row]) }}" class="delete-confirm">
                                     @method("delete")
                                     @csrf 
                                     <button class="btn btn-danger">
@@ -109,4 +109,39 @@
   </div>
 </div>
 
+@endsection
+
+@section('scripts')
+
+<script type="text/javascript" src="{{ asset('js/jquery-3.6.4.min.js') }}"></script>
+<script type="text/javascript" src="{{ asset('vendor/sweetalert/sweetalert.all.js') }}"></script>
+
+@if( session('confirmacion') == 'ok' )
+<script type="text/javascript">
+    Swal.fire(
+        'Eliminado!',
+        'El alumno se ha sido eliminado!',
+        'success'
+    )
+</script>
+@endif
+
+<script type="text/javascript">
+    $('.delete-confirm').submit(function(e){
+        e.preventDefault();
+        Swal.fire({
+            title: 'Esta seguro?',
+            text: "No podras restaurar los cambios",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Si, borrarlo!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                this.submit();
+            }
+        })
+    });
+</script>
 @endsection

@@ -5,14 +5,16 @@ namespace App\Http\Controllers;
 use App\Models\Alumnos;
 use App\Models\Carreras;
 use Illuminate\Http\Request;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class AlumnosController extends Controller
 {
     public function index()
     {
         //$alumnos = Alumnos::all();
-        /*Para traer el nombre especifico de la carrera*/
-        $alumnos = Alumnos::select('alumnos.id', 'nombre', 'correo', 'id_carrera', 'carrera')->join('carreras', 'carreras.id', '=', 'alumnos.id_carrera')->get();
+        /*Para traer el nombre especifico de la carrera hacemos una consulta mas avanzada a la db*/
+        $alumnos = Alumnos::select('alumnos.id', 'nombre', 'correo', 'id_carrera', 'carrera')
+        ->join('carreras', 'carreras.id', '=', 'alumnos.id_carrera')->get();
         $carreras = Carreras::all();
         return view('alumnos', compact('alumnos', 'carreras'));
     }
@@ -32,6 +34,7 @@ class AlumnosController extends Controller
     {
         $alumno = new Alumnos($request->input());
         $alumno->saveOrFail();
+        Alert::toast('Alumno creado correctamente!', 'success');
         return redirect('alumnos');
     }
 
@@ -70,6 +73,6 @@ class AlumnosController extends Controller
     {
         $alumno = Alumnos::find($id);
         $alumno->delete();
-        return redirect('alumnos');
+        return redirect('alumnos')->with('confirmacion', 'ok');
     }
 }

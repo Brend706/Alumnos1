@@ -33,11 +33,13 @@
     <div class="container-fluid">
         @yield('contenido')
     </div>
-
+    
     @include('sweetalert::alert')
     @yield('scripts')
 
     <script type="text/javascript" src="{{ asset('js/bootstrap.bundle.min.js') }}"></script>
+    
+
 </body>
 
 </html>

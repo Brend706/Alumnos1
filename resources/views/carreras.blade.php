@@ -37,11 +37,11 @@
                             </a>
                         </td>
                         <td>
-                            <form method="POST" action="{{ url('carreras', [$row]) }}" class="">
+                            <form method="POST" action="{{ url('carreras', [$row]) }}" class="delete-confirm">
                                 @method("delete")
                                 @csrf <!--  Genera un token c/v que se envia info cada sierto tiempo
                                     Evita ataques ... -->
-                                <button class="btn btn-danger delete-confirm" title="Eliminar" type="submit">
+                                <button class="btn btn-danger" title="Eliminar" type="submit">
                                     <i class="fa-solid fa-trash"></i>
                                 </button>
                             </form>
@@ -88,30 +88,36 @@
 
 @section('scripts')
 
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script type="text/javascript" src="{{ asset('js/jquery-3.6.4.min.js') }}"></script>
+<script type="text/javascript" src="{{ asset('vendor/sweetalert/sweetalert.all.js') }}"></script>
 
-<script>
-    $('.delete-confirm').click(function(event) {
+@if( session('confirmacion') == 'ok' )
+<script type="text/javascript">
+    Swal.fire(
+        'Eliminada!',
+        'La carrera ha sido eliminada!',
+        'success'
+    )
+</script>
+@endif
+
+<script type="text/javascript">
+    $('.delete-confirm').submit(function(event) {
         event.preventDefault();
 
         Swal.fire({
-            title: 'Are you sure?',
-            text: "You won't be able to revert this!",
+            title: 'Esta seguro?',
+            text: "No podras restaurar los cambios",
             icon: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#d33',
-            confirmButtonText: 'Yes, delete it!'
+            confirmButtonText: 'Si, borrarlo!'
         }).then((result) => {
             if (result.isConfirmed) {
-                Swal.fire(
-                    'Deleted!',
-                    'Your file has been deleted.',
-                    'success'
-                )
+                this.submit();
             }
         })
     });
-    /**/
 </script>
 @endsection
