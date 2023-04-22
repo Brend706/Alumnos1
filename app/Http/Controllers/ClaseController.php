@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Materias;
+use App\Models\Clase;
 use Illuminate\Http\Request;
 
-class MateriasController extends Controller
+class ClaseController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -34,7 +34,7 @@ class MateriasController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Materias $materias)
+    public function show(Clase $clase)
     {
         //
     }
@@ -42,7 +42,7 @@ class MateriasController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Materias $materias)
+    public function edit(Clase $clase)
     {
         //
     }
@@ -50,7 +50,7 @@ class MateriasController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Materias $materias)
+    public function update(Request $request, Clase $clase)
     {
         //
     }
@@ -58,7 +58,7 @@ class MateriasController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Materias $materias)
+    public function destroy(Clase $clase)
     {
         //
     }

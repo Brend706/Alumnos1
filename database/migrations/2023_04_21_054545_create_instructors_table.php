@@ -13,7 +13,9 @@ return new class extends Migration
     {
         Schema::create('instructors', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
+            $table->string('instructor');
+            $table->foreignId('id_materia')->constrained('materias')->onUpdate('cascade');
+            $table->softDeletes();
         });
     }
 

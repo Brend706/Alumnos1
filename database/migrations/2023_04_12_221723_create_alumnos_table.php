@@ -20,6 +20,8 @@ return new class extends Migration
             /*Cuando se actualice la carrera, se actualizara automaticamente en el alumno
             Y cuando se desee eliminar la carrera no se permitira borrarla si la tiene algun alumno*/
             //$table->timestamps();
+
+            $table->softDeletes(); //fecha de eliminacion
         });
     }
 

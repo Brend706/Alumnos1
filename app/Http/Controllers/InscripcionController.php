@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Salon;
+use App\Models\Inscripcion;
 use Illuminate\Http\Request;
 
-class SalonController extends Controller
+class InscripcionController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -34,7 +34,7 @@ class SalonController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Salon $salon)
+    public function show(Inscripcion $inscripcion)
     {
         //
     }
@@ -42,7 +42,7 @@ class SalonController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Salon $salon)
+    public function edit(Inscripcion $inscripcion)
     {
         //
     }
@@ -50,7 +50,7 @@ class SalonController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Salon $salon)
+    public function update(Request $request, Inscripcion $inscripcion)
     {
         //
     }
@@ -58,7 +58,7 @@ class SalonController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Salon $salon)
+    public function destroy(Inscripcion $inscripcion)
     {
         //
     }

@@ -13,7 +13,9 @@ return new class extends Migration
     {
         Schema::create('materias', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
+            $table->string('materia');
+            $table->foreignId('id_carrera')->constrained('carreras')->onUpdate('cascade')->onDelete('restrict');
+            $table->softDeletes(); //fecha de eliminacion
         });
     }
 
