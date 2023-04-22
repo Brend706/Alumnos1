@@ -10,5 +10,6 @@ class Carreras extends Model
 {
     use HasFactory;
     use SoftDeletes; //borra el elemento en la vista pero no en la base de datos
+    
     protected $fillable = ['carrera'];
 }

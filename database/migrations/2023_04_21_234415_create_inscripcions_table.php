@@ -17,6 +17,7 @@ return new class extends Migration
             $table->foreignId('id_alumno')->constrained('alumnos')->onUpdate('cascade')->onDelete('cascade');
             $table->foreignId('id_clase')->constrained('clases')->onUpdate('cascade')->onDelete('cascade');
             $table->softDeletes();
+            $table->timestamps();
         });
     }
 

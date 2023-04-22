@@ -19,3 +19,4 @@ Route::get('/', function () {
 
 Route::resource('carreras', \App\Http\Controllers\CarrerasController::class);
 Route::resource('alumnos', \App\Http\Controllers\AlumnosController::class);
+Route::resource('materias', \App\Http\Controllers\MateriasController::class);

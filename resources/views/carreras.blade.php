@@ -23,6 +23,7 @@
                         <th>CARRERA</th>
                         <th>EDITAR</th>
                         <th>ELIMINAR</th>
+                        <th>MATERIAS</th>
                     </tr>
                 </thead>
                 <tbody class="table-group-divider">
@@ -43,6 +44,16 @@
                                     Evita ataques ... -->
                                 <button class="btn btn-danger" title="Eliminar" type="submit">
                                     <i class="fa-solid fa-trash"></i>
+                                </button>
+                            </form>
+                        </td>
+                        <td>
+                            
+                            <form method="POST" action="{{ url('materias', [$row]) }}">
+                                @method("get")
+                                @csrf
+                                <button class="btn btn-info">
+                                    <i class="fa-solid fa-book"></i>
                                 </button>
                             </form>
                         </td>
