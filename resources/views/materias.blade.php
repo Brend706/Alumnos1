@@ -68,7 +68,7 @@
                         <span class="input-group-text">
                             <i class="fa-solid fa-book-font"></i>
                         </span>
-                        <input type="text" class="form-control" name="nombre" maxlength="50" placeholder="Nombre..." required>
+                        <input type="text" class="form-control" name="materia" maxlength="50" placeholder="Nombre..." required>
                     </div>
                     <div class="input-group mb-3">
                         <span class="input-group-text">

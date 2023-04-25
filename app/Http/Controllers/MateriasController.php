@@ -14,7 +14,7 @@ class MateriasController extends Controller
      */
     public function index()
     {
-        $materias = Materias::select('materias.id', 'id_carrera', 'carrera')
+        $materias = Materias::select('materias.id', 'materia', 'id_carrera', 'carrera')
         ->join('carreras', 'carreras.id', '=', 'materias.id_carrera')->get();
         $carreras = Carreras::all();
         return view('materias', compact('materias', 'carreras'));
