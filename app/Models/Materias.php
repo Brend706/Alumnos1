@@ -12,7 +12,7 @@ class Materias extends Model
     use SoftDeletes;
 
     public $timestamps = false;
-    protected $fillables = ['materia', 'id_carrera'];
+    protected $fillable = ['materia', 'id_carrera'];
 
     //relacion con el modelo Carrera
     //materia pertenece a una carrera (1 a 1)

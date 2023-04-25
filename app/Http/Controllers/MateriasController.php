@@ -2,18 +2,22 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Carreras;
 use App\Models\Materias;
 use Illuminate\Http\Request;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class MateriasController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index(string $carrera)
+    public function index()
     {
-        //Mostrar materias por carrera
-        return view('carreras');
+        $materias = Materias::select('materias.id', 'id_carrera', 'carrera')
+        ->join('carreras', 'carreras.id', '=', 'materias.id_carrera')->get();
+        $carreras = Carreras::all();
+        return view('materias', compact('materias', 'carreras'));
     }
 
     /**
@@ -29,7 +33,10 @@ class MateriasController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $materia = new Materias($request->input());
+        $materia->saveOrFail();
+        Alert::toast('Materia registrada correctamente!','success');
+        return redirect('materias');
     }
 
     /**

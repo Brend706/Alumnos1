@@ -26,6 +26,9 @@
                     <li class="nav-item">
                         <a class="nav-link" href="/carreras">Carreras</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/materias">Materias</a>
+                    </li>
             </div>
         </div>
     </nav>
