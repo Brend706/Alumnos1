@@ -24,6 +24,7 @@
                         <th>EDITAR</th>
                         <th>ELIMINAR</th>
                         <th>MATERIAS</th>
+                        <th>ALUMNOS</th>
                     </tr>
                 </thead>
                 <tbody class="table-group-divider">
@@ -48,12 +49,20 @@
                             </form>
                         </td>
                         <td>
-                            
                             <form method="POST" action="{{ url('carrera/materias', [$row]) }}">
                                 @method("get")
                                 @csrf
                                 <button class="btn btn-info">
                                     <i class="fa-solid fa-book"></i>
+                                </button>
+                            </form>
+                        </td>
+                        <td>
+                            <form action="{{ url('carrera/alumnos', [$row]) }}" method="post">
+                                @method("get")
+                                @csrf
+                                <button class="btn btn-info">
+                                    <i class="fa-solid fa-users"></i>
                                 </button>
                             </form>
                         </td>

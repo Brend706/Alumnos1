@@ -5,9 +5,12 @@
 <div class="row mt-3">
     <div class="col-md-4 offset-md-4">
         <div class="d-grid mx-auto">
-            <h1>
+            <h2>
                 Materias de {{$carrera->carrera}}
-            </h1>
+            </h2>
+            <button class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#modalMateria">
+                <i class="fa-solid fa-circle-plus"></i> Agregar Materia
+            </button>
         </div>
     </div>
 </div>
@@ -48,6 +51,36 @@
                     @endforeach
                 </tbody>
             </table>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="modalMateria" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="tituloModal">Agregar materia</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="frmMateria" method="POST" action="{{ url('addMateria', [$carrera->id]) }}">
+                    @csrf
+                    <div class="input-group mb-3">
+                        <span class="input-group-text">
+                            <i class="fa-solid fa-book"></i>
+                        </span>
+                        <input type="text" class="form-control" name="materia" maxlength="50" placeholder="Nombre..." required>
+                    </div>
+                    <div class="d-grid col-6 mx-auto">
+                        <button class="btn btn-success">
+                            <i class="fa-solid fa-floppy-disk"></i> Guardar
+                        </button>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="btnCerrar" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+            </div>
         </div>
     </div>
 </div>

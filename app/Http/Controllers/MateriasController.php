@@ -79,9 +79,14 @@ class MateriasController extends Controller
         return redirect('materias')->with('confirmacion', 'ok');
     }
 
+    //Mis funciones :3
+    public function agregarMateria(string $id){
+        //
+    }
+
     public function materiasDeLaCarrera(string $id){
         //Mostrar materias por carrera
-        $materias = DB::table('materias')->where('id_carrera', "=", $id)->get();
+        $materias = DB::table('materias')->where('id_carrera', "=", $id)->where('deleted_at', '=', null)->get();
         $carrera = Carreras::find($id);
         return view('matxCarrera', compact('materias', 'carrera'));
     }

@@ -23,6 +23,7 @@ Route::resource('carreras', \App\Http\Controllers\CarrerasController::class);
 Route::resource('alumnos', \App\Http\Controllers\AlumnosController::class);
 Route::resource('materias', \App\Http\Controllers\MateriasController::class);
 
+Route::post('addMateria/{carrera}', [MateriasController::class, 'agregarMateria']);
 Route::get('carrera/materias/{id}', [MateriasController::class, 'materiasDeLaCarrera']);
 Route::delete('deleteMateria/{carrera}/{materia}', [MateriasController::class, 'destroyMateria']);
 

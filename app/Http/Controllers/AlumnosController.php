@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Alumnos;
 use App\Models\Carreras;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class AlumnosController extends Controller
@@ -74,5 +75,11 @@ class AlumnosController extends Controller
         $alumno = Alumnos::find($id);
         $alumno->delete();
         return redirect('alumnos')->with('confirmacion', 'ok');
+    }
+
+    public function alumnosDeLaCarrera(string $id){
+        $alumnos = DB::table('alumnos')->where('id_carrera', '=', $id)->get();
+        $carrera =  Carreras::find($id);
+        return view('alumnosxCarrera', compact('alumnos', 'carrera'));
     }
 }
