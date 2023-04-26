@@ -49,7 +49,7 @@
                         </td>
                         <td>
                             
-                            <form method="POST" action="{{ url('materias', [$row]) }}">
+                            <form method="POST" action="{{ url('carrera/materias', [$row]) }}">
                                 @method("get")
                                 @csrf
                                 <button class="btn btn-info">

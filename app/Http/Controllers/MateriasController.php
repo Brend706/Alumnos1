@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Carreras;
 use App\Models\Materias;
+use Dotenv\Util\Str;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class MateriasController extends Controller
@@ -44,7 +46,9 @@ class MateriasController extends Controller
      */
     public function show(string $id)
     {
-        //
+        //Mostrar materia para editar
+        $materia = Materias::find($id);
+        return view('editMateria', compact('materia'));
     }
 
     /**
@@ -52,7 +56,7 @@ class MateriasController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        
     }
 
     /**
@@ -60,7 +64,9 @@ class MateriasController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $materia = Materias::find($id);
+        $materia->fill($request->input())->saveOrFail();
+        return redirect('materias');
     }
 
     /**
@@ -68,6 +74,21 @@ class MateriasController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $materia = Materias::find($id);
+        $materia->delete();
+        return redirect('materias')->with('confirmacion', 'ok');
+    }
+
+    public function materiasDeLaCarrera(string $id){
+        //Mostrar materias por carrera
+        $materias = DB::table('materias')->where('id_carrera', "=", $id)->get();
+        $carrera = Carreras::find($id);
+        return view('matxCarrera', compact('materias', 'carrera'));
+    }
+
+    public function destroyMateria( string $carrer, string $id){
+        $materia = Materias::find($id);
+        $materia->delete();
+        return redirect("carrera/materias/$carrer")->with('confirmacion', 'ok');
     }
 }

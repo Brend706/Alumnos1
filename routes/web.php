@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\AlumnosController;
+use App\Http\Controllers\MateriasController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -20,3 +22,8 @@ Route::get('/', function () {
 Route::resource('carreras', \App\Http\Controllers\CarrerasController::class);
 Route::resource('alumnos', \App\Http\Controllers\AlumnosController::class);
 Route::resource('materias', \App\Http\Controllers\MateriasController::class);
+
+Route::get('carrera/materias/{id}', [MateriasController::class, 'materiasDeLaCarrera']);
+Route::delete('deleteMateria/{carrera}/{materia}', [MateriasController::class, 'destroyMateria']);
+
+Route::get('carrera/alumnos/{id}', [AlumnosController::class, 'alumnosDeLaCarrera']);
