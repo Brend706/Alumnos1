@@ -4,46 +4,31 @@ namespace App\Http\Controllers;
 
 use App\Models\Carreras;
 use App\Models\Materias;
-use Dotenv\Util\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class MateriasController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
+        //vista general
+        //Muestra todas las materias guardadas y desplega el nombre de la carrera segun el id_carrera
         $materias = Materias::select('materias.id', 'materia', 'id_carrera', 'carrera')
         ->join('carreras', 'carreras.id', '=', 'materias.id_carrera')->get();
         $carreras = Carreras::all();
         return view('materias', compact('materias', 'carreras'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
+        //crea materias desde la vista general de todas las materias
         $materia = new Materias($request->input());
         $materia->saveOrFail();
         Alert::toast('Materia registrada correctamente!','success');
         return redirect('materias');
     }
 
-    /**
-     * Display the specified resource.
-     */
     public function show(string $id)
     {
         //Mostrar materia para editar
@@ -51,37 +36,32 @@ class MateriasController extends Controller
         return view('editMateria', compact('materia'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(Request $request, string $id)
     {
+        //actualiza la materia desde la vista general
         $materia = Materias::find($id);
         $materia->fill($request->input())->saveOrFail();
         return redirect('materias');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(string $id)
     {
+        //borra la materia desde la vista general
         $materia = Materias::find($id);
         $materia->delete();
         return redirect('materias')->with('confirmacion', 'ok');
     }
 
-    //Mis funciones :3
-    public function agregarMateria(string $id){
+    //Mis funciones 
+    public function agregarMateria(Request $request, string $id){
         //
+        $materia = new Materias();
+        $materia->materia = $request->materia;
+        $materia->id_carrera = $id;
+        $materia->saveOrFail();
+
+        Alert::toast('Materia registrada correctamente!','success');
+        return redirect("carrera/materias/$id");
     }
 
     public function materiasDeLaCarrera(string $id){
@@ -91,9 +71,15 @@ class MateriasController extends Controller
         return view('matxCarrera', compact('materias', 'carrera'));
     }
 
-    public function destroyMateria( string $carrer, string $id){
+    public function destroyMateria( string $carrera, string $id){
         $materia = Materias::find($id);
         $materia->delete();
-        return redirect("carrera/materias/$carrer")->with('confirmacion', 'ok');
+        return redirect("carrera/materias/$carrera")->with('confirmacion', 'ok');
+    }
+
+    public function actualizarMateria(Request $request, string $carrera, string $id){
+        $materia =  Materias::find($id);
+        $materia->fill($request->input())->saveOrFail();
+        return redirect("carrera/materias/$carrera", compact('materia'));
     }
 }
