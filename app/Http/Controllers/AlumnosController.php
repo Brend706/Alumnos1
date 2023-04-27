@@ -20,17 +20,6 @@ class AlumnosController extends Controller
         return view('alumnos', compact('alumnos', 'carreras'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
         $alumno = new Alumnos($request->input());
@@ -39,9 +28,6 @@ class AlumnosController extends Controller
         return redirect('alumnos');
     }
 
-    /**
-     * Display the specified resource.
-     */
     public function show(string $id)
     {
         $alumno = Alumnos::find($id);
@@ -49,17 +35,6 @@ class AlumnosController extends Controller
         return view('editAlumno', compact('alumno', 'carreras'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(Request $request, string $id)
     {
         $alumno = Alumnos::find($id);
@@ -67,14 +42,22 @@ class AlumnosController extends Controller
         return redirect('alumnos');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(string $id)
     {
         $alumno = Alumnos::find($id);
         $alumno->delete();
         return redirect('alumnos')->with('confirmacion', 'ok');
+    }
+
+    //MIS FUNCIONES...
+
+    public function agregarAlumno(Request $request, string $carrera){
+        $alumno = new Alumnos();
+        $alumno->nombre = $request->nombre;
+        $alumno->correo = $request->correo;
+        $alumno->id_carrera = $carrera;
+        $alumno->saveOrFail();
+        return redirect("carrera/alumnos/$carrera");
     }
 
     public function alumnosDeLaCarrera(string $id){

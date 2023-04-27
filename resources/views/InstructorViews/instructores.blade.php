@@ -2,14 +2,11 @@
 
 @section('contenido')
 
-<div class="row m-3">
-    <h1 class="display-6 text-center mb-4">
-        Materias de {{$carrera->carrera}}
-    </h1>
+<div class="row mt-3">
     <div class="col-md-4 offset-md-4">
         <div class="d-grid mx-auto">
-            <button class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#modalMateria">
-                <i class="fa-solid fa-circle-plus"></i> Agregar Materia
+            <button class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#modalInstructor">
+                <i class="fa-solid fa-circle-plus"></i> Agregar Instructor
             </button>
         </div>
     </div>
@@ -22,6 +19,7 @@
                 <thead>
                     <tr>
                         <th>#</th>
+                        <th>INSTRUCTOR</th>
                         <th>MATERIA</th>
                         <th>EDITAR</th>
                         <th>ELIMINAR</th>
@@ -29,15 +27,18 @@
                 </thead>
                 <tbody class="table-group-divider">
                     @php $i = 1; @endphp
-                    @foreach($materias as $row)
+                    @foreach($instructors as $row)
                     <tr>
                         <td>{{ $i++ }}</td>
+                        <td>{{ $row->instructor }}</td>
                         <td>{{ $row->materia }}</td>
                         <td>
-
+                            <a href="{{ url('instructors', [$row]) }}" class="btn btn-warning">
+                                <i class="fa-solid fa-edit"></i>
+                            </a>
                         </td>
                         <td>
-                            <form method="POST" action="{{ url('deleteMateria', [$carrera->id ,$row->id]) }}" class="delete-confirm">
+                            <form method="POST" action="{{ url('instructors', [$row]) }}" class="delete-confirm">
                                 @method("delete")
                                 @csrf
                                 <button class="btn btn-danger">
@@ -53,55 +54,33 @@
     </div>
 </div>
 
-<div class="modal fade" id="modalMateria" tabindex="-1" aria-hidden="true">
+<div class="modal fade" id="modalInstructor" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h1 class="modal-title fs-5" id="tituloModal">Agregar materia</h1>
+                <h1 class="modal-title fs-5" id="tituloModal">Agregar Instructor</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form id="frmMateria" method="POST" action="{{ url('addMateria', [$carrera->id]) }}">
+                <form id="" method="POST" action="{{ url('instructors') }}">
                     @method('POST')
                     @csrf
                     <div class="input-group mb-3">
                         <span class="input-group-text">
-                            <i class="fa-solid fa-book"></i>
+                            <i class="fa-solid fa-book-font"></i>
                         </span>
-                        <input type="text" class="form-control" name="materia" maxlength="50" placeholder="Nombre..." required>
+                        <input type="text" class="form-control" name="instructor" maxlength="50" placeholder="Nombre..." required>
                     </div>
-                    <div class="d-grid col-6 mx-auto">
-                        <button class="btn btn-success">
-                            <i class="fa-solid fa-floppy-disk"></i> Guardar
-                        </button>
-                    </div>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" id="btnCerrar" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!--NO FUNCIONA-->
-<div class="modal fade" id="modalEditMateria" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h1 class="modal-title fs-5" id="tituloModal">Editar materia</h1>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <form id="frmEditMateria" method="POST" action="{{ url('putMateria', ['#idcar.value()', '#idmat.value()']) }}">
-                    @method('POST')
-                    @csrf
                     <div class="input-group mb-3">
                         <span class="input-group-text">
-                            <i class="fa-solid fa-book"></i>
+                            <i class="fa-solid fa-graduation-cap"></i>
                         </span>
-                        <input type="text" class="form-control" name="materia" maxlength="50" placeholder="Nombre..." 
-                        value="#nombmat.value()" required>
+                        <select name="id_materia" class="form-select" required>
+                            <option value="">Asignar Materia...</option>
+                            @foreach($materias as $row)
+                            <option value="{{ $row->id }}"> {{$row->materia}} </option>
+                            @endforeach
+                        </select>
                     </div>
                     <div class="d-grid col-6 mx-auto">
                         <button class="btn btn-success">

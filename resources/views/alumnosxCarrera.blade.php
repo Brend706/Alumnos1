@@ -2,9 +2,9 @@
 
 @section('contenido')
 
-<div class="row mt-3">
+<div class="row m-3">
+    <h2 class="display-6 text-center mb-4">Alumnos de {{$carrera->carrera}}</h2>
     <div class="col-md-4 offset-md-4">
-        <h2>Alumnos de {{$carrera->carrera}}</h2>
         <div class="d-grid mx-auto"> <!--clases para que el boto sea responsivo-->
             <button class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#modalAlumno">
                 <i class="fa-solid fa-circle-plus"></i>  Agregar
@@ -63,7 +63,8 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <form id="frmAlumnos" method="POST" action="{{ url('alumnos') }}">
+        <form id="frmAlumnos" method="POST" action="{{ url('addAlumno', [$carrera->id]) }}">
+            @method('POST')
             @csrf
           <div class="input-group mb-3">
             <span class="input-group-text">

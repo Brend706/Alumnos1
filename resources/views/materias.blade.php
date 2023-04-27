@@ -63,6 +63,7 @@
             </div>
             <div class="modal-body">
                 <form id="frmMateria" method="POST" action="{{ url('materias') }}">
+                    @method('POST')
                     @csrf
                     <div class="input-group mb-3">
                         <span class="input-group-text">

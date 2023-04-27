@@ -3,16 +3,16 @@
 namespace App\Http\Controllers;
 
 use App\Models\Instructor;
+use App\Models\Materias;
 use Illuminate\Http\Request;
 
 class InstructorController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        //
+        $instructors = Instructor::all();
+        $materias = Materias::all();
+        return view('InstructorViews/instructores', compact('instructors', 'materias'));
     }
 
     /**
